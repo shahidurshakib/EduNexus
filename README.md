@@ -67,7 +67,7 @@ EduNexus/
 │   └── .env.example
 │
 └── README.md
-Getting Started
+Getting Started 
 
 Follow the steps below to run EduNexus on your local machine.
 
