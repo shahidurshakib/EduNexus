@@ -369,7 +369,7 @@ Project Highlights
 Full-stack web application
 React + Vite frontend
 Express.js REST API
-MySQL relational database
+MySQL relational database 
 JWT authentication
 Role-Based Access Control
 Secure password hashing
