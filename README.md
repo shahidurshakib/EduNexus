@@ -1,45 +1,56 @@
-EduNexus
+# EduNexus
+### Education Management, University Research & Startup Innovation Platform
 
-EduNexus is a full-stack Education Management and University Research & Startup Innovation platform that I developed to make academic and institutional management easier, more organized, and more accessible.
+EduNexus is a full-stack Education Management and University Research & Startup Innovation Platform developed by **Shahidur Rahman Shakib**. The platform aims to simplify academic and institutional management while creating an organized digital ecosystem for students, mentors, investors, administrators, and startup founders.
 
-The project combines a modern React frontend, Express.js backend, and MySQL database. It includes authentication, role-based access control, user management, course management, email verification, notifications, and different workflows for Members, Mentors, Investors, Admins, and Founders.
+Built with React.js, Node.js, Express.js, and MySQL, EduNexus provides a centralized environment for managing academic activities, user accounts, courses, research-related collaboration, and startup innovation workflows.
 
-I developed EduNexus as a practical full-stack project to improve my skills in React, Node.js, Express.js, MySQL, REST APIs, authentication, database design, and modern web application development.
+The project was developed as a practical full-stack application to strengthen expertise in modern web technologies, backend architecture, database management, authentication, API development, and scalable application design.
 
-Features
-JWT-based Authentication & Authorization
-Role-Based Access Control (RBAC)
-Student/Member Management
-Teacher/Mentor Management
-Investor Management
-Admin & Founder Management
-Course Management
-Email Verification with OTP
-Password Reset
-Notifications
-Mentor/Investor Approval Workflow
-Admin Approval Workflow
-RESTful API
-MySQL Database Integration
-Responsive User Interface
-Secure Password Hashing with bcrypt
-Tech Stack
-Frontend
-React.js
-Vite
-Tailwind CSS
-Axios
-React Router
-Backend
-Node.js
-Express.js
-JWT
-Nodemailer
-bcrypt
-mysql2
-Database
-MySQL 8+
-Project Structure
+---
+
+## Key Features
+
+- JWT-Based Authentication and Authorization
+- Role-Based Access Control (RBAC)
+- Student and Member Management
+- Teacher and Mentor Management
+- Investor Management
+- Admin and Founder Management
+- Course Management
+- Email Verification with OTP
+- Password Reset Functionality
+- Notification Management
+- Mentor and Investor Approval Workflow
+- Administrative Approval System
+- RESTful API Architecture
+- MySQL Database Integration
+- Secure Password Hashing with bcrypt
+- Responsive User Interface
+
+## Technology Stack
+
+### Frontend
+- React.js
+- Vite
+- Tailwind CSS
+- Axios
+- React Router
+
+### Backend
+- Node.js
+- Express.js
+- JSON Web Token (JWT)
+- Nodemailer
+- bcrypt
+- mysql2
+
+### Database
+- MySQL 8+
+
+## Project Structure
+
+```text
 EduNexus/
 │
 ├── database/
@@ -67,66 +78,98 @@ EduNexus/
 │   └── .env.example
 │
 └── README.md
-<<<<<<< HEAD
-Getting Started
-=======
-Getting Started 
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
+```
 
-Follow the steps below to run EduNexus on your local machine.
+---
 
-Prerequisites
+# Getting Started
 
-Make sure the following are installed:
+Follow the instructions below to configure and run EduNexus on your local development environment.
 
-Node.js 18+
-npm
-MySQL 8+
-Git
-VS Code (recommended)
-1. Clone the Repository
+## Prerequisites
+
+Make sure the following software is installed:
+
+- Node.js 18+
+- npm
+- MySQL 8+
+- Git
+- Visual Studio Code (Recommended)
+
+## 1. Clone the Repository
+
+```bash
 git clone https://github.com/shahidurshakib/EduNexus.git
 cd EduNexus
-2. Setup MySQL Database
+```
 
-Create a database named edunexus_project:
+## 2. Database Configuration
 
-CREATE DATABASE edunexus_project CHARACTER SET utf8mb4;
+Create a MySQL database named `edunexus_project`.
 
-Then import the database files.
+```sql
+CREATE DATABASE edunexus_project
+CHARACTER SET utf8mb4;
+```
 
-macOS / Linux / Git Bash
+Import the database files.
+
+**macOS / Linux / Git Bash**
+
+```bash
 mysql -u root -p edunexus_project < database/schema.sql
 mysql -u root -p edunexus_project < database/migration_phase2.sql
-Windows PowerShell
+```
 
-PowerShell does not support the < redirect operator in the same way, so use:
+**Windows PowerShell**
 
+```powershell
 Get-Content database/schema.sql | mysql -u root -p edunexus_project
+
 Get-Content database/migration_phase2.sql | mysql -u root -p edunexus_project
+```
 
-If you are using XAMPP and mysql is not recognized, use the MySQL executable directly:
+**For XAMPP users**
 
+If MySQL is not recognized as a command, use the MySQL executable directly:
+
+```powershell
 Get-Content database/schema.sql | & "C:\xampp\mysql\bin\mysql.exe" -u root edunexus_project
-3. Backend Setup
+```
 
-Open a terminal and go to the backend folder:
+Repeat the command for the migration file.
 
+## 3. Backend Configuration
+
+Navigate to the backend directory:
+
+```bash
 cd backend
+```
 
-Install the required packages:
+Install the dependencies:
 
+```bash
 npm install
+```
 
-Create the environment file:
+Create your environment configuration file.
 
-macOS / Linux / Git Bash
+**macOS / Linux / Git Bash**
+
+```bash
 cp .env.example .env
-Windows PowerShell
+```
+
+**Windows PowerShell**
+
+```powershell
 Copy-Item .env.example .env
+```
 
-Open backend/.env and configure your settings:
+Open `backend/.env` and configure the following environment variables:
 
+```env
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_USER=root
@@ -138,296 +181,393 @@ JWT_REFRESH_SECRET=your_refresh_secret
 
 EMAIL_USER=your_email@gmail.com
 EMAIL_PASS=your_gmail_app_password
-JWT Secret
+```
 
-Use long random strings for the JWT secrets.
+### JWT Secret Configuration
 
-You can generate them with:
+Use strong, randomly generated values for your JWT secrets.
 
+You can generate secure random strings using Node.js:
+
+```bash
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
-Email Configuration
+```
+
+Generate separate values for the access and refresh token secrets.
+
+### Email Configuration
 
 Email credentials are required for:
 
-OTP verification
-Password reset
-Email notifications
+- OTP-based email verification
+- Password reset
+- Email notifications
 
-For Gmail, EMAIL_PASS should be a Google App Password, not your normal Gmail password.
+For Gmail integration, use a Google App Password instead of your regular Gmail account password.
 
-If email is not configured, the application can still run, but OTP emails will not be sent. During development, an account can be verified manually using:
+If email functionality is not configured, email-based verification and notifications will not work.
 
-UPDATE users
-SET is_email_verified = 1
-WHERE email = 'your-email@example.com';
-Seed Demo Data
+### Initialize Demo Data
 
-After configuring the database:
+After configuring the database, execute:
 
+```bash
 npm run seed
+```
 
-Then start the backend:
+This command initializes the available demo data and role-based accounts.
 
+### Start the Backend Server
+
+```bash
 npm run dev
+```
 
-The backend API should be available at:
+The backend API should be accessible at:
 
+```text
 http://localhost:5000
-4. Frontend Setup
+```
 
-Open another terminal.
+## 4. Frontend Configuration
 
+Open another terminal and navigate to the frontend directory:
+
+```bash
 cd frontend
+```
 
-Install dependencies:
+Install the required dependencies:
 
+```bash
 npm install
+```
 
-Create the environment file.
+Create the frontend environment file.
 
-macOS / Linux / Git Bash
+**macOS / Linux / Git Bash**
+
+```bash
 cp .env.example .env
-Windows PowerShell
+```
+
+**Windows PowerShell**
+
+```powershell
 Copy-Item .env.example .env
+```
 
-Make sure frontend/.env contains:
+Configure `frontend/.env`:
 
+```env
 VITE_API_BASE_URL=http://localhost:5000/api
+```
 
-Important: The /api part must be included.
+**Important:** The `/api` suffix must be included in the API base URL.
 
-For example:
+Correct:
 
+```text
 http://localhost:5000/api
+```
 
-not:
+Incorrect:
 
+```text
 http://localhost:5000
+```
 
-Leaving out /api is one of the most common reasons for getting a 404 error during registration or login.
+An incorrect API base URL may cause 404 errors during registration, authentication, and other API operations.
 
-Start the frontend:
+### Start the Frontend
 
+```bash
 npm run dev
+```
 
-The frontend should now be available at:
+The frontend should now be accessible at:
 
+```text
 http://localhost:5173
-Demo Accounts
+```
 
-Running:
+---
 
+## Demo Accounts
+
+Running the seed command:
+
+```bash
 npm run seed
+```
 
-creates demo accounts for different roles.
+creates demo accounts for different user roles.
 
-All seeded accounts use:
+| Role | Email |
+|---|---|
+| Founder | founder@edunexus.local |
+| Admin | admin@edunexus.local |
+| Mentor | kamal.mentor@example.com |
+| Investor | rafiul.investor@example.com |
+| Member | nusrat@example.com |
 
-Password: ChangeMe123!
-Role	Email
-Founder	founder@edunexus.local
-Admin	admin@edunexus.local
-Mentor	kamal.mentor@example.com
-Investor	rafiul.investor@example.com
-Member	nusrat@example.com
+Demo account credentials, if configured by the seed script, should be obtained from the development setup rather than published in this documentation.
 
-For security, change the default passwords after logging in.
+For security, change any default credentials before using the application outside a local development environment.
 
-Role & Approval Workflow
+---
 
-EduNexus uses different approval rules depending on the user's role.
+## Role-Based Access & Approval Workflow
 
-Member
+EduNexus implements a role-based account management system with different approval requirements.
 
-Members do not require administrative approval.
+### Member
 
-A user can register, verify their email, and become an active Member.
+- Members do not require administrative approval.
+- Users can register and verify their email addresses.
+- Once verification is completed, they can access Member functionality.
 
-Mentor / Investor
+### Mentor / Investor
 
-Mentor and Investor roles can be requested during registration.
+- Users can request Mentor or Investor roles during registration.
+- Requested roles remain pending until approved by an authorized Founder or Admin.
+- Following approval, the requested role becomes active.
+- Approved users gain access to their respective role-specific functionality.
 
-However, the account initially remains a Member until the request is approved by a Founder or Admin.
+### Admin
 
-After approval:
+- Admin accounts cannot be created directly through the public registration page.
+- Existing users may request administrative access.
+- Admin role requests require Founder approval.
 
-The requested role becomes active.
-The appropriate profile becomes available.
-The user gets access to role-specific functionality.
-Admin
+### Founder
 
-Admin accounts cannot be directly created from the registration page.
+The Founder represents the highest-level administrative role in the platform.
 
-An existing user can request Admin access, but the request must be approved by the Founder.
+The Founder account is initialized through the seed process:
 
-Founder
-
-The Founder is the highest-level role in the system.
-
-The Founder account is created through:
-
+```bash
 npm run seed
+```
 
-The Founder can approve:
+The Founder has authority to approve:
 
-Admin requests
-Mentor requests
-Investor requests
-Production Build
+- Admin requests
+- Mentor requests
+- Investor requests
 
-To create a production build of the frontend:
+---
 
+## Production Build & Deployment
+
+To generate an optimized production build of the frontend, navigate to the frontend directory:
+
+```bash
 cd frontend
 npm run build
+```
 
-The production files will be generated inside:
+The generated production files will be available in:
 
+```text
 frontend/dist
+```
 
-Possible deployment platforms include:
+### Supported Deployment Options
 
-Vercel
-Netlify
-Render
-Railway
-VPS
-MySQL hosting services
+Potential deployment environments include:
 
-When deploying frontend and backend separately, update:
+- Vercel
+- Netlify
+- Render
+- Railway
+- Virtual Private Server (VPS)
+- MySQL-Compatible Hosting Services
 
+When deploying the frontend and backend separately, configure the frontend environment variable with your actual production API URL:
+
+```env
 VITE_API_BASE_URL=https://your-backend-url.com/api
+```
 
-The URL must point to the actual deployed backend API.
+Make sure the URL points to the deployed backend API.
 
-Troubleshooting
-404 Error During Registration or Login
+**Production Security Recommendations**
 
-Check the following:
+- Use HTTPS for all production connections.
+- Never expose database credentials or JWT secrets.
+- Store sensitive configuration in environment variables.
+- Use strong, unique authentication secrets.
+- Restrict database access to trusted services.
+- Configure appropriate CORS policies.
+- Change all development and seed credentials.
+- Never commit `.env` files or private credentials to GitHub.
 
-1. Backend is running
+---
+
+## Troubleshooting
+
+### 1. 404 Error During Registration or Login
+
+Check the following configurations:
+
+**Backend Server**
+
+```bash
 cd backend
 npm run dev
+```
 
-The backend should run on:
+Expected URL:
 
+```text
 http://localhost:5000
-2. Frontend is running
+```
+
+**Frontend Server**
+
+```bash
 cd frontend
 npm run dev
+```
 
-The frontend should run on:
+Expected URL:
 
+```text
 http://localhost:5173
-3. Check frontend .env
+```
 
-Make sure:
+**Frontend Environment Configuration**
 
+Verify that `frontend/.env` contains:
+
+```env
 VITE_API_BASE_URL=http://localhost:5000/api
+```
 
-contains /api.
+**Backend Environment Configuration**
 
-4. Check backend .env
+Verify that the database connection details are correct:
 
-Make sure the database credentials are correct:
-
+```env
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=your_mysql_password
 DB_NAME=edunexus_project
+```
 
-Also make sure schema.sql has been imported successfully.
+Also, ensure that the database schema and migration files have been imported successfully.
 
-White Screen After Login
+### 2. White Screen After Login
 
-If the dashboard shows a white screen:
+If the dashboard displays a blank screen:
 
-Open the browser.
-Press F12.
-Open the Console tab.
-Check the React error message.
+1. Open your browser.
+2. Press `F12`.
+3. Navigate to the Console tab.
+4. Review the reported React errors.
+5. Inspect the relevant dashboard components.
 
-A common reason is trying to render an object directly inside JSX.
+Check the following directory:
 
-Check the components inside:
-
+```text
 frontend/src/pages/dashboards/
+```
 
-and make sure API objects are converted to appropriate strings, numbers, or UI components before rendering.
+A common cause is attempting to render a JavaScript object directly inside JSX. Convert API response objects into appropriate strings, numbers, or UI components before rendering them.
 
-Email / SMTP Error
+### 3. Email / SMTP Authentication Error
 
-If you see an SMTP or email authentication error, check:
+Verify the following environment variables:
 
+```env
 EMAIL_USER=your_email@gmail.com
 EMAIL_PASS=your_gmail_app_password
+```
 
-For Gmail, use a Google App Password instead of your normal Gmail password.
+For Gmail, use a valid Google App Password rather than your regular account password.
 
-If email is not required during development, manually verify the account:
+If email services are not configured, OTP verification and email notifications will not function.
 
+For local development only, an email can be manually marked as verified through the database, if the application supports this workflow:
+
+```sql
 UPDATE users
 SET is_email_verified = 1
 WHERE email = 'your-email@example.com';
-Project Highlights
-Full-stack web application
-React + Vite frontend
-Express.js REST API
-<<<<<<< HEAD
-MySQL relational database
-=======
-MySQL relational database 
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
-JWT authentication
-Role-Based Access Control
-Secure password hashing
-Email OTP verification
-Approval-based role management
-Responsive UI
-Modular backend architecture
-Scalable database structure
-What I Learned From This Project
+```
 
-While developing EduNexus, I worked with different parts of a complete web application, including:
+---
 
-Designing a relational database
-Building REST APIs
-Connecting React with an Express backend
-Implementing JWT authentication
-Managing user roles and permissions
-Working with MySQL
-Handling environment variables
-Implementing email verification
-Creating approval workflows
-Debugging frontend and backend issues
-Preparing an application for deployment
+## Project Highlights
 
-This project helped me understand how the different parts of a full-stack application work together rather than treating frontend, backend, and database development as separate tasks.
+- Full-Stack Web Application Architecture
+- Modern React + Vite Frontend
+- Express.js RESTful Backend
+- MySQL Relational Database
+- JWT-Based Authentication
+- Role-Based Access Control
+- Secure Password Hashing
+- Email OTP Verification
+- Approval-Based Role Management
+- Responsive User Interface
+- Modular Backend Architecture
+- Structured Database Design
+- Academic and Institutional Management Workflows
 
-Author
+## What I Learned
 
-Shahidur Rahman Shakib
+Developing EduNexus provided practical experience in designing, developing, and integrating different components of a full-stack web application.
 
-Computer Science and Engineering
-Metropolitan University, Sylhet, Bangladesh
+Throughout this project, I gained hands-on experience in:
 
-GitHub:
+- Relational database design and management
+- RESTful API development
+- React and Express.js integration
+- JWT-based authentication and authorization
+- Role and permission management
+- MySQL database integration
+- Environment variable configuration
+- Email verification and OTP implementation
+- Administrative approval workflows
+- Frontend and backend debugging
+- Application deployment preparation
+- Modular and maintainable application architecture
+
+This project strengthened my understanding of how frontend interfaces, backend services, authentication systems, and relational databases work together to build a complete web application.
+
+---
+
+## Author
+
+**Shahidur Rahman Shakib**
+
+Computer Science and Engineering  
+Metropolitan University  
+Sylhet, Bangladesh
+
+**GitHub:**  
 https://github.com/shahidurshakib
 
+---
 
-LICENSE
+## License
 
-Copyright (c) 2026 Shahidur Rahman Shakib.
+Copyright © 2026 Shahidur Rahman Shakib. All Rights Reserved.
 
-This project was developed by Shahidur Rahman Shakib for educational, academic, and research purposes.
+EduNexus is an independently developed project created for educational, academic, research, and technological development purposes.
 
-All rights reserved.
+Unless otherwise stated, the source code, architecture, design, documentation, and associated project materials are the intellectual property of the author.
 
-Permission is granted to use, study, and reference this project for non-commercial educational and research purposes, provided that proper credit is given to the original author.
+Permission is granted to access, study, and reference this project for personal, educational, and non-commercial research purposes, provided that appropriate credit is given to the original author.
 
-Unauthorized commercial use, redistribution, modification, or reproduction of this project, in whole or in part, without prior written permission from the author is prohibited.
+No part of this project may be commercially exploited, redistributed, republished, modified, or reproduced without prior written permission from the author, except where otherwise permitted by applicable law.
 
-For permission or further inquiries, please contact the author.
+This project is provided for educational and research purposes. No warranty is expressed or implied regarding its functionality, reliability, or suitability for any particular purpose.
 
-Author: Shahidur Rahman Shakib
+For licensing inquiries, commercial use, or permission requests, please contact the author.
 
+**Author:** Shahidur Rahman Shakib  
+**Project:** EduNexus  
+**Copyright:** © 2026 Shahidur Rahman Shakib. All Rights Reserved.
