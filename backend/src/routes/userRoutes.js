@@ -1,3 +1,4 @@
+
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 const router = express.Router();
@@ -8,51 +9,139 @@ const { authorize } = require('../middleware/role');
 
 function validate(req, res, next) {
   const errors = validationResult(req);
+
   if (!errors.isEmpty()) {
-    return res.status(400).json({ success: false, message: errors.array()[0].msg, errors: errors.array() });
+    return res.status(400).json({
+      success: false,
+      message: errors.array()[0].msg,
+      errors: errors.array()
+    });
   }
+
   next();
 }
 
-// ---------------- User management (Founder + Admin) ----------------
-router.get('/users', protect, authorize('platform_founder', 'admin'), userController.getAllUsers);
-router.get('/users/:id', protect, authorize('platform_founder', 'admin'), userController.getUserById);
-router.patch('/users/:id/suspend', protect, authorize('platform_founder', 'admin'), userController.suspendUser);
-router.patch('/users/:id/activate', protect, authorize('platform_founder', 'admin'), userController.activateUser);
-router.delete('/users/:id', protect, authorize('platform_founder', 'admin'), userController.deleteUser);
+// ============================================================================
+// USER MANAGEMENT (Founder + Admin)
+// ============================================================================
 
-// Founder-only
-router.patch('/users/:id/remove-admin', protect, authorize('platform_founder'), userController.removeAdmin);
-<<<<<<< HEAD
-router.patch('/users/:id/make-admin', protect, authorize('platform_founder'), userController.makeAdmin);
-=======
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
+router.get(
+  '/users',
+  protect,
+  authorize('platform_founder', 'admin'),
+  userController.getAllUsers
+);
 
-// ---------------- Role approval workflow ----------------
+router.get(
+  '/users/:id',
+  protect,
+  authorize('platform_founder', 'admin'),
+  userController.getUserById
+);
+
+router.patch(
+  '/users/:id/suspend',
+  protect,
+  authorize('platform_founder', 'admin'),
+  userController.suspendUser
+);
+
+router.patch(
+  '/users/:id/activate',
+  protect,
+  authorize('platform_founder', 'admin'),
+  userController.activateUser
+);
+
+router.delete(
+  '/users/:id',
+  protect,
+  authorize('platform_founder', 'admin'),
+  userController.deleteUser
+);
+
+// ============================================================================
+// FOUNDER-ONLY ADMIN MANAGEMENT
+// ============================================================================
+
+router.patch(
+  '/users/:id/remove-admin',
+  protect,
+  authorize('platform_founder'),
+  userController.removeAdmin
+);
+
+router.patch(
+  '/users/:id/make-admin',
+  protect,
+  authorize('platform_founder'),
+  userController.makeAdmin
+);
+
+// ============================================================================
+// ROLE APPROVAL WORKFLOW
+// ============================================================================
+
 router.post(
   '/approvals/request',
   protect,
-  [body('requestedRole').isIn(['admin', 'mentor', 'investor']).withMessage('requestedRole must be admin, mentor, or investor')],
+  [
+    body('requestedRole')
+      .isIn(['admin', 'mentor', 'investor'])
+      .withMessage('requestedRole must be admin, mentor, or investor')
+  ],
   validate,
   userController.requestRole
 );
-router.get('/approvals', protect, authorize('platform_founder', 'admin'), userController.getApprovals);
-router.patch('/approvals/:id/approve', protect, authorize('platform_founder', 'admin'), userController.approveRequest);
-router.patch('/approvals/:id/reject', protect, authorize('platform_founder', 'admin'), userController.rejectRequest);
 
-// ---------------- Public directories ----------------
+router.get(
+  '/approvals',
+  protect,
+  authorize('platform_founder', 'admin'),
+  userController.getApprovals
+);
+
+router.patch(
+  '/approvals/:id/approve',
+  protect,
+  authorize('platform_founder', 'admin'),
+  userController.approveRequest
+);
+
+router.patch(
+  '/approvals/:id/reject',
+  protect,
+  authorize('platform_founder', 'admin'),
+  userController.rejectRequest
+);
+
+// ============================================================================
+// PUBLIC DIRECTORIES
+// ============================================================================
+
 router.get('/mentors', userController.getPublicMentors);
 router.get('/mentors/:id', userController.getMentorProfile);
+
 router.get('/investors', userController.getPublicInvestors);
 router.get('/investors/:id', userController.getInvestorProfile);
-<<<<<<< HEAD
+
 router.get('/members', userController.getPublicMembers);
 router.get('/members/:id', userController.getMemberProfile);
-=======
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 
-// ---------------- Self-service profile updates ----------------
-router.patch('/mentors/me', protect, userController.updateMyMentorProfile);
-router.patch('/investors/me', protect, userController.updateMyInvestorProfile);
+// ============================================================================
+// SELF-SERVICE PROFILE UPDATES
+// ============================================================================
+
+router.patch(
+  '/mentors/me',
+  protect,
+  userController.updateMyMentorProfile
+);
+
+router.patch(
+  '/investors/me',
+  protect,
+  userController.updateMyInvestorProfile
+);
 
 module.exports = router;

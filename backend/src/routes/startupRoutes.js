@@ -1,3 +1,4 @@
+
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 const router = express.Router();
@@ -10,23 +11,35 @@ const { optionalAuth } = require('../middleware/optionalAuth');
 
 function validate(req, res, next) {
   const errors = validationResult(req);
+
   if (!errors.isEmpty()) {
-    return res.status(400).json({ success: false, message: errors.array()[0].msg, errors: errors.array() });
+    return res.status(400).json({
+      success: false,
+      message: errors.array()[0].msg,
+      errors: errors.array()
+    });
   }
+
   next();
 }
 
+// Startup listing and statistics
 router.get('/', optionalAuth, startupController.listStartups);
-<<<<<<< HEAD
 router.get('/stats/summary', startupController.getStats);
-=======
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
+
+// Startup details
 router.get('/:id', startupController.getStartup);
 
+// Create, update and delete startup
 router.post(
   '/',
   protect,
-  [body('name').trim().notEmpty().withMessage('Startup name is required')],
+  [
+    body('name')
+      .trim()
+      .notEmpty()
+      .withMessage('Startup name is required')
+  ],
   validate,
   startupController.createStartup
 );
@@ -34,9 +47,22 @@ router.post(
 router.put('/:id', protect, startupController.updateStartup);
 router.delete('/:id', protect, startupController.deleteStartup);
 
-router.patch('/:id/logo', protect, uploadStartupLogo.single('logo'), startupController.uploadLogo);
-router.patch('/:id/status', protect, authorize('platform_founder', 'admin'), startupController.updateStatus);
+// Startup logo and status
+router.patch(
+  '/:id/logo',
+  protect,
+  uploadStartupLogo.single('logo'),
+  startupController.uploadLogo
+);
 
+router.patch(
+  '/:id/status',
+  protect,
+  authorize('platform_founder', 'admin'),
+  startupController.updateStatus
+);
+
+// Assign startup members
 router.post('/:id/founders', protect, startupController.assignFounder);
 router.post('/:id/mentors', protect, startupController.assignMentor);
 router.post('/:id/investors', protect, startupController.assignInvestor);

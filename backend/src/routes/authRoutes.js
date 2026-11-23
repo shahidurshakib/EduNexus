@@ -1,5 +1,7 @@
+
 const express = require('express');
 const { body, validationResult } = require('express-validator');
+
 const router = express.Router();
 
 const authController = require('../controllers/authController');
@@ -9,12 +11,19 @@ const { authLimiter, otpLimiter } = require('../middleware/rateLimiter');
 
 function validate(req, res, next) {
   const errors = validationResult(req);
+
   if (!errors.isEmpty()) {
-    return res.status(400).json({ success: false, message: errors.array()[0].msg, errors: errors.array() });
+    return res.status(400).json({
+      success: false,
+      message: errors.array()[0].msg,
+      errors: errors.array(),
+    });
   }
+
   next();
 }
 
+// Register
 router.post(
   '/register',
   authLimiter,
@@ -29,6 +38,16 @@ router.post(
   authController.register
 );
 
+// Google Login
+router.post(
+  '/google',
+  authLimiter,
+  [body('idToken').notEmpty().withMessage('idToken is required')],
+  validate,
+  authController.googleLogin
+);
+
+// Verify OTP
 router.post(
   '/verify-otp',
   otpLimiter,
@@ -40,6 +59,7 @@ router.post(
   authController.verifyOtp
 );
 
+// Resend OTP
 router.post(
   '/resend-otp',
   otpLimiter,
@@ -48,6 +68,7 @@ router.post(
   authController.resendOtp
 );
 
+// Login
 router.post(
   '/login',
   authLimiter,
@@ -59,21 +80,16 @@ router.post(
   authController.login
 );
 
-<<<<<<< HEAD
-router.post(
-  '/google',
-  authLimiter,
-  [body('idToken').notEmpty().withMessage('idToken is required')],
-  validate,
-  authController.googleLogin
-);
-
-=======
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
+// Refresh Token
 router.post('/refresh-token', authController.refreshToken);
+
+// Logout
 router.post('/logout', authController.logout);
+
+// Current User
 router.get('/me', protect, authController.me);
 
+// Forgot Password
 router.post(
   '/forgot-password',
   otpLimiter,
@@ -82,6 +98,7 @@ router.post(
   authController.forgotPassword
 );
 
+// Reset Password
 router.post(
   '/reset-password',
   otpLimiter,

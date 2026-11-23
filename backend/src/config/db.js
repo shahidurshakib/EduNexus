@@ -1,11 +1,22 @@
+
 const mysql = require('mysql2/promise');
+const fs = require('fs');
+const path = require('path');
+
+const caPath = path.join(__dirname, '../../certs/ca.pem');
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
-  port: process.env.DB_PORT || 3306,
+  port: Number(process.env.DB_PORT) || 3306,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
+
+  ssl: {
+    ca: fs.readFileSync(caPath),
+    rejectUnauthorized: true,
+  },
+
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
@@ -14,9 +25,10 @@ const pool = mysql.createPool({
 
 async function testConnection() {
   const conn = await pool.getConnection();
+
   try {
     await conn.ping();
-    console.log('✅ MySQL connected:', process.env.DB_NAME);
+    console.log('✅ Aiven MySQL connected:', process.env.DB_NAME);
   } finally {
     conn.release();
   }

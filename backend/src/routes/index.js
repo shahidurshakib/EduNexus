@@ -1,3 +1,4 @@
+
 const express = require('express');
 const router = express.Router();
 
@@ -11,16 +12,11 @@ const dashboardRoutes = require('./dashboardRoutes');
 const searchRoutes = require('./searchRoutes');
 const logRoutes = require('./logRoutes');
 const reportRoutes = require('./reportRoutes');
-<<<<<<< HEAD
 const applicationsRoutes = require('./applicationsRoutes');
 
 router.use('/auth', authRoutes);
 router.use('/applications', applicationsRoutes);
-=======
-
-router.use('/auth', authRoutes);
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
-router.use('/', userRoutes); // /users, /approvals, /mentors, /investors
+router.use('/', userRoutes);
 router.use('/startups', startupRoutes);
 router.use('/notifications', notificationRoutes);
 router.use('/research', researchRoutes);
@@ -31,7 +27,11 @@ router.use('/logs', logRoutes);
 router.use('/reports', reportRoutes);
 
 router.get('/health', (req, res) => {
-  res.json({ success: true, message: 'EduNexus API is running', time: new Date().toISOString() });
+  res.json({
+    success: true,
+    message: 'EduNexus API is running',
+    time: new Date().toISOString()
+  });
 });
 
 module.exports = router;
