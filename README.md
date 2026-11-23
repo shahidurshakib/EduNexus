@@ -414,10 +414,20 @@ Metropolitan University, Sylhet, Bangladesh
 GitHub:
 https://github.com/shahidurshakib
 
-License
 
-<<<<<<< HEAD
-This project was developed by me for educational, academic, and research purposes.
-=======
-This project was developed by me for educational, academic, and research purposes.
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
+LICENSE
+
+Copyright (c) 2026 Shahidur Rahman Shakib.
+
+This project was developed by Shahidur Rahman Shakib for educational, academic, and research purposes.
+
+All rights reserved.
+
+Permission is granted to use, study, and reference this project for non-commercial educational and research purposes, provided that proper credit is given to the original author.
+
+Unauthorized commercial use, redistribution, modification, or reproduction of this project, in whole or in part, without prior written permission from the author is prohibited.
+
+For permission or further inquiries, please contact the author.
+
+Author: Shahidur Rahman Shakib
+
