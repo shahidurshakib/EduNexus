@@ -15,6 +15,7 @@ export const createPatent = (payload) => request(client.post('/research/patents'
 export const listPatents = (params) => request(client.get('/research/patents', { params }))
 export const updatePatent = (id, payload) => request(client.put(`/research/patents/${id}`, payload))
 export const deletePatent = (id) => request(client.delete(`/research/patents/${id}`))
+<<<<<<< HEAD
 
 export const addResearchMentor = (id, mentorId) => request(client.post(`/research/${id}/mentors`, { mentorId }))
 
@@ -39,3 +40,5 @@ export const downloadResearchDocument = async (docId, filename = 'document.pdf')
   a.remove()
   window.URL.revokeObjectURL(url)
 }
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092

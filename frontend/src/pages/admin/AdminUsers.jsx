@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react'
+<<<<<<< HEAD
 import { listUsers, suspendUser, activateUser, deleteUser, removeAdmin, makeAdmin } from '../../api/users'
+=======
+import { listUsers, suspendUser, activateUser, deleteUser, removeAdmin } from '../../api/users'
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 import DataTable from '../../components/ui/DataTable'
 import Loader from '../../components/ui/Loader'
 import Pagination from '../../components/ui/Pagination'
@@ -60,9 +64,12 @@ export default function AdminUsers() {
                       {r.role === 'admin' && me?.role === 'platform_founder' && (
                         <button className="btn-ghost !px-2 !py-1 text-xs" onClick={() => act(removeAdmin, r.id)}>Remove admin</button>
                       )}
+<<<<<<< HEAD
                       {r.role !== 'admin' && me?.role === 'platform_founder' && (
                         <button className="btn-ghost !px-2 !py-1 text-xs text-gold-600" onClick={() => act(makeAdmin, r.id)}>Make admin</button>
                       )}
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
                       <button className="btn-ghost !px-2 !py-1 text-xs text-red-500" onClick={() => confirm('Delete this user?') && act(deleteUser, r.id)}>Delete</button>
                     </div>
                   )

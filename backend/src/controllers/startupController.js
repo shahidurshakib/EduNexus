@@ -321,6 +321,7 @@ async function assignFounder(req, res, next) {
   }
 }
 
+<<<<<<< HEAD
 // ----------------------------------------------------------------------------
 // GET /api/startups/stats/summary  (public)
 // "Running startups" = startups that have at least one investor attached.
@@ -341,6 +342,8 @@ async function getStats(req, res, next) {
   }
 }
 
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 module.exports = {
   createStartup,
   listStartups,
@@ -352,5 +355,8 @@ module.exports = {
   assignMentor,
   assignInvestor,
   assignFounder,
+<<<<<<< HEAD
   getStats,
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 };

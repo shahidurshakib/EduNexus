@@ -1,13 +1,19 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { getStartup, deleteStartup, updateStartupStatus } from '../../api/startups'
+<<<<<<< HEAD
 import { listIncomingApplications } from '../../api/applications'
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 import Loader from '../../components/ui/Loader'
 import ErrorBanner from '../../components/ui/ErrorBanner'
 import Badge from '../../components/ui/Badge'
 import DataTable from '../../components/ui/DataTable'
+<<<<<<< HEAD
 import ApplyModal from '../../components/applications/ApplyModal'
 import ApplicationReviewList from '../../components/applications/ApplicationReviewList'
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 import { useAuth } from '../../context/AuthContext'
 
 export default function StartupDetail() {
@@ -16,12 +22,16 @@ export default function StartupDetail() {
   const navigate = useNavigate()
   const [data, setData] = useState(null)
   const [error, setError] = useState('')
+<<<<<<< HEAD
   const [applyOpen, setApplyOpen] = useState(false)
   const [apps, setApps] = useState([])
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 
   const load = () => getStartup(id).then(setData).catch((e) => setError(e.message))
   useEffect(() => { load() }, [id])
 
+<<<<<<< HEAD
   const loadApps = () => {
     listIncomingApplications().then((d) => {
       setApps((d.applications || []).filter((a) => a.targetType === 'startup' && String(a.targetId) === String(id)))
@@ -42,6 +52,13 @@ export default function StartupDetail() {
   const canManage = canManageEarly
   const isFounder = user && founders.some((f) => f.id === user.id)
   const canApply = user && ['member', 'mentor'].includes(user.role) && !isFounder
+=======
+  if (error) return <div className="container-page py-16"><ErrorBanner message={error} /></div>
+  if (!data) return <Loader />
+
+  const { startup, founders = [], mentors = [], investors = [], fundingHistory = [] } = data
+  const canManage = user && (user.role === 'platform_founder' || user.role === 'admin' || founders.some((f) => f.id === user.id))
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 
   const onDelete = async () => {
     if (!confirm(`Delete ${startup.name}? This cannot be undone.`)) return
@@ -66,6 +83,7 @@ export default function StartupDetail() {
             <button onClick={onDelete} className="btn-danger">Delete</button>
           </div>
         )}
+<<<<<<< HEAD
         {canApply && (
           <button onClick={() => setApplyOpen(true)} className="btn-primary">Apply to collaborate</button>
         )}
@@ -80,6 +98,10 @@ export default function StartupDetail() {
         allowLock
       />
 
+=======
+      </div>
+
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
       <p className="mt-6 max-w-3xl text-ink-600 dark:text-ink-300">{startup.description}</p>
 
       {startup.funding_needed != null && (
@@ -122,6 +144,7 @@ export default function StartupDetail() {
           emptyLabel="No funding rounds recorded."
         />
       </div>
+<<<<<<< HEAD
 
       {canManage && (
         <div className="mt-8">
@@ -129,6 +152,8 @@ export default function StartupDetail() {
           <ApplicationReviewList applications={apps} onChanged={loadApps} mode="incoming" />
         </div>
       )}
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
     </div>
   )
 }

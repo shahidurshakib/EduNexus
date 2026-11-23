@@ -9,7 +9,10 @@ const links = [
   { to: '/research', label: 'Research' },
   { to: '/mentors', label: 'Mentors' },
   { to: '/investors', label: 'Investors' },
+<<<<<<< HEAD
   { to: '/members', label: 'Members' },
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
   { to: '/about', label: 'About' },
   { to: '/contact', label: 'Contact' },
 ]

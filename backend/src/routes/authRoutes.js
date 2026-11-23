@@ -59,6 +59,7 @@ router.post(
   authController.login
 );
 
+<<<<<<< HEAD
 router.post(
   '/google',
   authLimiter,
@@ -67,6 +68,8 @@ router.post(
   authController.googleLogin
 );
 
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 router.post('/refresh-token', authController.refreshToken);
 router.post('/logout', authController.logout);
 router.get('/me', protect, authController.me);

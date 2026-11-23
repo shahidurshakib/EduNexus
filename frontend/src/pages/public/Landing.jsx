@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+<<<<<<< HEAD
 import { listStartups, getStartupStats } from '../../api/startups'
+=======
+import { listStartups } from '../../api/startups'
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 import { listResearch } from '../../api/research'
 import Loader from '../../components/ui/Loader'
 
@@ -10,6 +14,7 @@ const PILLARS = [
   { n: '03', title: 'Track the round', body: 'Funding rounds advance the startup stage automatically — from idea to seed to scale, logged and reportable.' },
 ]
 
+<<<<<<< HEAD
 const RULES = [
   {
     role: 'Mentor',
@@ -77,15 +82,37 @@ export default function Landing() {
         research: r.status === 'fulfilled' ? r.value.total : null,
       })
       setFeatured(f.status === 'fulfilled' ? (f.value.startups || []).slice(0, 3) : [])
+=======
+export default function Landing() {
+  const [stats, setStats] = useState(null)
+
+  useEffect(() => {
+    Promise.allSettled([
+      listStartups({ limit: 1 }),
+      listResearch({ limit: 1 }),
+    ]).then(([s, r]) => {
+      setStats({
+        startups: s.status === 'fulfilled' ? s.value.total : null,
+        research: r.status === 'fulfilled' ? r.value.total : null,
+      })
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
     })
   }, [])
 
   return (
+<<<<<<< HEAD
     <div className="overflow-hidden">
       {/* Hero */}
       <section className="border-b border-ink-100 bg-gradient-to-b from-white to-paper dark:border-ink-800 dark:from-ink-900 dark:to-ink-900">
         <div className="container-page grid gap-12 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:py-28">
           <div className="animate-fade-up">
+=======
+    <div>
+      {/* Hero */}
+      <section className="border-b border-ink-100 bg-gradient-to-b from-white to-paper dark:border-ink-800 dark:from-ink-900 dark:to-ink-900">
+        <div className="container-page grid gap-12 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:py-28">
+          <div>
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
             <p className="eyebrow">Campus → Company, verified at every step</p>
             <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
               Where a lab notebook<br /> becomes a <span className="text-gold-500">term sheet.</span>
@@ -98,6 +125,7 @@ export default function Landing() {
               <Link to="/register" className="btn-primary px-6 py-3 text-base">Join EduNexus</Link>
               <Link to="/startups" className="btn-secondary px-6 py-3 text-base">Browse startups</Link>
             </div>
+<<<<<<< HEAD
 
             {/* Infographic stat strip */}
             <dl className="mt-12 grid max-w-lg grid-cols-2 gap-4 font-mono sm:grid-cols-3">
@@ -141,11 +169,42 @@ export default function Landing() {
               <p className="mt-2 text-sm text-ink-500 dark:text-ink-400">
                 Every startup, mentor, investor and research entry lives on a single verified profile.
               </p>
+=======
+            <dl className="mt-12 grid max-w-md grid-cols-2 gap-6 font-mono">
+              <div>
+                <dt className="text-xs uppercase tracking-wide text-ink-400">Startups logged</dt>
+                <dd className="mt-1 text-2xl font-semibold text-ink-800 dark:text-paper">{stats?.startups ?? '—'}</dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-wide text-ink-400">Research records</dt>
+                <dd className="mt-1 text-2xl font-semibold text-ink-800 dark:text-paper">{stats?.research ?? '—'}</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div className="relative">
+            <div className="card rotate-1">
+              <p className="eyebrow">Startup record #012</p>
+              <p className="mt-2 font-display text-xl">AgriSense</p>
+              <p className="mt-1 text-sm text-ink-400">AgriTech · Sylhet</p>
+              <div className="mt-4 flex gap-2">
+                <span className="badge-moss">seed</span>
+                <span className="badge-gold">2 mentors</span>
+              </div>
+              <div className="mt-5 h-px bg-ink-100 dark:bg-ink-700" />
+              <p className="mt-4 font-mono text-xs text-ink-400">funding to date</p>
+              <p className="font-display text-2xl text-gold-500">$35,000</p>
+            </div>
+            <div className="card absolute -bottom-8 -left-8 hidden w-56 -rotate-2 sm:block">
+              <p className="eyebrow">Verified ✓</p>
+              <p className="mt-2 text-sm text-ink-500">OTP-verified accounts only. No anonymous listings.</p>
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
             </div>
           </div>
         </div>
       </section>
 
+<<<<<<< HEAD
       {/* Vision & Mission */}
       <section className="container-page py-20">
         <div className="grid gap-10 md:grid-cols-2">
@@ -178,13 +237,20 @@ export default function Landing() {
         </div>
       </section>
 
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
       {/* How it works */}
       <section className="container-page py-20">
         <p className="eyebrow">How the ledger moves</p>
         <h2 className="mt-2 font-display text-3xl font-semibold">Three hand-offs, one record.</h2>
         <div className="mt-10 grid gap-8 md:grid-cols-3">
+<<<<<<< HEAD
           {PILLARS.map((p, i) => (
             <div key={p.n} className="animate-fade-up border-t-2 border-gold-400 pt-5" style={{ animationDelay: `${i * 120}ms` }}>
+=======
+          {PILLARS.map((p) => (
+            <div key={p.n} className="border-t-2 border-gold-400 pt-5">
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
               <span className="font-mono text-sm text-ink-300">{p.n}</span>
               <h3 className="mt-2 font-display text-xl">{p.title}</h3>
               <p className="mt-2 text-sm text-ink-500 dark:text-ink-400">{p.body}</p>
@@ -193,6 +259,7 @@ export default function Landing() {
         </div>
       </section>
 
+<<<<<<< HEAD
       {/* Rules per role */}
       <section className="border-y border-ink-100 bg-ink-800 py-20 text-paper dark:border-ink-800">
         <div className="container-page">
@@ -215,6 +282,24 @@ export default function Landing() {
                     </li>
                   ))}
                 </ul>
+=======
+      {/* Roles */}
+      <section className="border-y border-ink-100 bg-ink-800 py-20 text-paper dark:border-ink-800">
+        <div className="container-page">
+          <p className="eyebrow text-gold-300">Five roles, one platform</p>
+          <h2 className="mt-2 font-display text-3xl font-semibold">Built for every seat at the table.</h2>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+            {[
+              ['Founder', 'Runs the platform, approves admins.'],
+              ['Admin', 'Reviews mentors, investors, keeps records clean.'],
+              ['Mentor', 'Guides assigned startups toward funding-ready.'],
+              ['Investor', 'Tracks a portfolio and records rounds.'],
+              ['Member', 'Registers a startup or a research project.'],
+            ].map(([role, desc]) => (
+              <div key={role} className="rounded-lg border border-ink-700 p-5">
+                <p className="font-display text-lg text-gold-300">{role}</p>
+                <p className="mt-2 text-sm text-ink-300">{desc}</p>
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
               </div>
             ))}
           </div>

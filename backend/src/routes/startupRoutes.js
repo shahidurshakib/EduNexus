@@ -17,7 +17,10 @@ function validate(req, res, next) {
 }
 
 router.get('/', optionalAuth, startupController.listStartups);
+<<<<<<< HEAD
 router.get('/stats/summary', startupController.getStats);
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 router.get('/:id', startupController.getStartup);
 
 router.post(

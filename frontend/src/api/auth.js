@@ -1,7 +1,10 @@
 import client, { request } from './client'
 
 export const login = (email, password) => request(client.post('/auth/login', { email, password }))
+<<<<<<< HEAD
 export const googleLogin = (idToken) => request(client.post('/auth/google', { idToken }))
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 export const register = (payload) => request(client.post('/auth/register', payload))
 export const verifyOtp = (payload) => request(client.post('/auth/verify-otp', payload))
 export const resendOtp = (payload) => request(client.post('/auth/resend-otp', payload))

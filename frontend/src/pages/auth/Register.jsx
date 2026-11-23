@@ -2,7 +2,10 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import * as authApi from '../../api/auth'
 import ErrorBanner from '../../components/ui/ErrorBanner'
+<<<<<<< HEAD
 import GoogleAuthButton from '../../components/auth/GoogleAuthButton'
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 
 const ROLES = [
   { value: 'member', label: 'Member — I want to register a startup or research' },
@@ -72,8 +75,11 @@ export default function Register() {
         <button disabled={loading} className="btn-primary w-full">{loading ? 'Creating account…' : 'Create account'}</button>
       </form>
 
+<<<<<<< HEAD
       <GoogleAuthButton onError={setError} />
 
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
       <p className="mt-6 text-center text-sm text-ink-500 dark:text-ink-400">
         Already have an account? <Link to="/login" className="font-medium text-gold-600 hover:underline">Log in</Link>
       </p>

@@ -2,7 +2,10 @@ import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import ErrorBanner from '../../components/ui/ErrorBanner'
+<<<<<<< HEAD
 import GoogleAuthButton from '../../components/auth/GoogleAuthButton'
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 
 export default function Login() {
   const { login } = useAuth()
@@ -47,8 +50,11 @@ export default function Login() {
         <button disabled={loading} className="btn-primary w-full">{loading ? 'Logging in…' : 'Log in'}</button>
       </form>
 
+<<<<<<< HEAD
       <GoogleAuthButton onError={setError} />
 
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
       <p className="mt-6 text-center text-sm text-ink-500 dark:text-ink-400">
         New to EduNexus? <Link to="/register" className="font-medium text-gold-600 hover:underline">Create an account</Link>
       </p>

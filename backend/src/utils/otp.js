@@ -10,6 +10,7 @@ function generateOtp(length = Number(process.env.OTP_LENGTH) || 6) {
 function getOtpExpiry(minutes = Number(process.env.OTP_EXPIRY_MINUTES) || 10) {
   const expiry = new Date();
   expiry.setMinutes(expiry.getMinutes() + minutes);
+<<<<<<< HEAD
   // Build the DATETIME string from LOCAL time components (not .toISOString(),
   // which converts to UTC). MySQL's DATETIME column has no timezone of its
   // own, and this string gets re-parsed later with `new Date(expires_at)` —
@@ -21,6 +22,10 @@ function getOtpExpiry(minutes = Number(process.env.OTP_EXPIRY_MINUTES) || 10) {
     `${expiry.getFullYear()}-${pad(expiry.getMonth() + 1)}-${pad(expiry.getDate())} ` +
     `${pad(expiry.getHours())}:${pad(expiry.getMinutes())}:${pad(expiry.getSeconds())}`
   );
+=======
+  // MySQL DATETIME format
+  return expiry.toISOString().slice(0, 19).replace('T', ' ');
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 }
 
 module.exports = { generateOtp, getOtpExpiry };

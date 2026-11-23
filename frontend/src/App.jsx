@@ -27,10 +27,15 @@ import ResearchForm from './pages/research/ResearchForm'
 
 import Mentors from './pages/directory/Mentors'
 import Investors from './pages/directory/Investors'
+<<<<<<< HEAD
 import Members from './pages/directory/Members'
 
 import DashboardHome from './pages/dashboards/DashboardHome'
 import Requests from './pages/dashboards/Requests'
+=======
+
+import DashboardHome from './pages/dashboards/DashboardHome'
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 import AdminUsers from './pages/admin/AdminUsers'
 import AdminApprovals from './pages/admin/AdminApprovals'
 import AdminFunding from './pages/admin/AdminFunding'
@@ -58,7 +63,10 @@ export default function App() {
         <Route path="/research/:id" element={<ResearchDetail />} />
         <Route path="/mentors" element={<Mentors />} />
         <Route path="/investors" element={<Investors />} />
+<<<<<<< HEAD
         <Route path="/members" element={<Members />} />
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
         <Route path="/search" element={<SearchResults />} />
       </Route>
 
@@ -83,7 +91,10 @@ export default function App() {
           <Route path="/dashboard/research/new" element={<ResearchForm />} />
           <Route path="/dashboard/research/:id/edit" element={<ResearchForm />} />
           <Route path="/dashboard/profile" element={<Profile />} />
+<<<<<<< HEAD
           <Route path="/dashboard/requests" element={<Requests />} />
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
           <Route path="/dashboard/notifications" element={<Notifications />} />
 
           <Route element={<ProtectedRoute roles={['admin', 'platform_founder']} />}>

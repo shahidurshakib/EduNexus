@@ -1,11 +1,15 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+<<<<<<< HEAD
 const crypto = require('crypto');
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 const { pool } = require('../config/db');
 const { generateAccessToken, generateRefreshToken } = require('../utils/generateTokens');
 const { generateOtp, getOtpExpiry } = require('../utils/otp');
 const { sendOtpEmail } = require('../utils/sendEmail');
 
+<<<<<<< HEAD
 // google-auth-library is an optional dependency: if `npm install` hasn't
 // been re-run since it was added to package.json, requiring it directly
 // here would throw and crash THIS ENTIRE FILE at load time — which would
@@ -20,6 +24,8 @@ try {
 }
 const googleClient = OAuth2Client ? new OAuth2Client(process.env.GOOGLE_CLIENT_ID) : null;
 
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 const SELECTABLE_ROLES = ['member', 'mentor', 'investor'];
 
 const cookieOptions = {
@@ -265,6 +271,7 @@ async function login(req, res, next) {
 }
 
 // ----------------------------------------------------------------------------
+<<<<<<< HEAD
 // POST /api/auth/google  { idToken }
 // Sign in (or silently register) with a Google account. Google has already
 // verified the email, so these accounts skip the OTP step entirely.
@@ -341,6 +348,8 @@ async function googleLogin(req, res, next) {
 }
 
 // ----------------------------------------------------------------------------
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 // POST /api/auth/refresh-token
 // ----------------------------------------------------------------------------
 async function refreshToken(req, res, next) {
@@ -497,7 +506,10 @@ module.exports = {
   verifyOtp,
   resendOtp,
   login,
+<<<<<<< HEAD
   googleLogin,
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
   refreshToken,
   logout,
   me,

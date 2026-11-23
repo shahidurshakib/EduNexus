@@ -23,7 +23,10 @@ router.delete('/users/:id', protect, authorize('platform_founder', 'admin'), use
 
 // Founder-only
 router.patch('/users/:id/remove-admin', protect, authorize('platform_founder'), userController.removeAdmin);
+<<<<<<< HEAD
 router.patch('/users/:id/make-admin', protect, authorize('platform_founder'), userController.makeAdmin);
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 
 // ---------------- Role approval workflow ----------------
 router.post(
@@ -42,8 +45,11 @@ router.get('/mentors', userController.getPublicMentors);
 router.get('/mentors/:id', userController.getMentorProfile);
 router.get('/investors', userController.getPublicInvestors);
 router.get('/investors/:id', userController.getInvestorProfile);
+<<<<<<< HEAD
 router.get('/members', userController.getPublicMembers);
 router.get('/members/:id', userController.getMemberProfile);
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 
 // ---------------- Self-service profile updates ----------------
 router.patch('/mentors/me', protect, userController.updateMyMentorProfile);

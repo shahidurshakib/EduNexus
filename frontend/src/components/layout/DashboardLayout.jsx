@@ -14,7 +14,10 @@ const NAV = {
     { to: '/dashboard/admin/funding', label: 'Funding' },
     { to: '/dashboard/admin/reports', label: 'Reports' },
     { to: '/dashboard/admin/logs', label: 'Activity logs' },
+<<<<<<< HEAD
     { to: '/dashboard/requests', label: 'Requests' },
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
     { to: '/dashboard/notifications', label: 'Notifications' },
   ],
   admin: [
@@ -26,28 +29,40 @@ const NAV = {
     { to: '/dashboard/admin/funding', label: 'Funding' },
     { to: '/dashboard/admin/reports', label: 'Reports' },
     { to: '/dashboard/admin/logs', label: 'Activity logs' },
+<<<<<<< HEAD
     { to: '/dashboard/requests', label: 'Requests' },
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
     { to: '/dashboard/notifications', label: 'Notifications' },
   ],
   mentor: [
     { to: '/dashboard', label: 'Overview', end: true },
     { to: '/dashboard/startups', label: 'My startups' },
     { to: '/dashboard/profile', label: 'Public profile' },
+<<<<<<< HEAD
     { to: '/dashboard/requests', label: 'Requests' },
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
     { to: '/dashboard/notifications', label: 'Notifications' },
   ],
   investor: [
     { to: '/dashboard', label: 'Overview', end: true },
     { to: '/dashboard/startups', label: 'Portfolio' },
     { to: '/dashboard/profile', label: 'Public profile' },
+<<<<<<< HEAD
     { to: '/dashboard/requests', label: 'Requests' },
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
     { to: '/dashboard/notifications', label: 'Notifications' },
   ],
   member: [
     { to: '/dashboard', label: 'Overview', end: true },
     { to: '/dashboard/startups', label: 'My startups' },
     { to: '/dashboard/research', label: 'My research' },
+<<<<<<< HEAD
     { to: '/dashboard/requests', label: 'Requests' },
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
     { to: '/dashboard/notifications', label: 'Notifications' },
   ],
 }

@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 const path = require('path');
 const { pool } = require('../config/db');
 const { getPagination, notifyUser, logActivity } = require('../utils/query');
+=======
+const { pool } = require('../config/db');
+const { getPagination, logActivity } = require('../utils/query');
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 
 const MANAGER_ROLES = ['platform_founder', 'admin'];
 
@@ -8,6 +13,7 @@ async function canManageResearch(req, createdBy) {
   return MANAGER_ROLES.includes(req.user.role) || createdBy === req.user.id;
 }
 
+<<<<<<< HEAD
 // Anyone allowed to add a draft proposal / view a locked one: the creator,
 // a listed author, an attached mentor, or an admin/founder.
 async function getResearchCollaboratorIds(researchId) {
@@ -23,6 +29,8 @@ async function getResearchCollaboratorIds(researchId) {
   return [...new Set(ids)];
 }
 
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 // ----------------------------------------------------------------------------
 // POST /api/research
 // ----------------------------------------------------------------------------
@@ -119,11 +127,15 @@ async function listResearch(req, res, next) {
 async function getResearch(req, res, next) {
   try {
     const { id } = req.params;
+<<<<<<< HEAD
     const [rows] = await pool.query(
       `SELECT r.*, u.full_name AS created_by_name, u.organization AS created_by_organization
        FROM research r JOIN users u ON u.id = r.created_by WHERE r.id = ? LIMIT 1`,
       [id]
     );
+=======
+    const [rows] = await pool.query(`SELECT * FROM research WHERE id = ? LIMIT 1`, [id]);
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
     if (rows.length === 0) return res.status(404).json({ success: false, message: 'Research not found' });
 
     const [authors] = await pool.query(
@@ -131,6 +143,7 @@ async function getResearch(req, res, next) {
       [id]
     );
     const [patents] = await pool.query(`SELECT * FROM patents WHERE research_id = ?`, [id]);
+<<<<<<< HEAD
     const [mentors] = await pool.query(
       `SELECT m.id AS mentor_id, u.full_name, m.expertise FROM research_mentors rm
        JOIN mentors m ON m.id = rm.mentor_id JOIN users u ON u.id = m.user_id
@@ -243,6 +256,10 @@ async function downloadResearchDocument(req, res, next) {
 
     const absolutePath = path.join(__dirname, '..', '..', doc.file_path.replace(/^\/uploads/, 'uploads'));
     return res.download(absolutePath, doc.original_name || undefined);
+=======
+
+    return res.json({ success: true, data: { research: rows[0], authors, patents } });
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
   } catch (err) {
     next(err);
   }
@@ -420,9 +437,12 @@ module.exports = {
   updateResearch,
   deleteResearch,
   uploadPdf,
+<<<<<<< HEAD
   addResearchMentor,
   uploadResearchDocument,
   downloadResearchDocument,
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
   createPatent,
   listPatents,
   updatePatent,

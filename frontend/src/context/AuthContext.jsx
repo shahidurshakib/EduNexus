@@ -32,12 +32,15 @@ export function AuthProvider({ children }) {
     return data.user
   }, [])
 
+<<<<<<< HEAD
   const loginWithGoogle = useCallback(async (idToken) => {
     const data = await authApi.googleLogin(idToken)
     persist(data.user, data.accessToken)
     return data.user
   }, [])
 
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
   const logout = useCallback(async () => {
     try { await authApi.logout() } catch (e) { /* ignore */ }
     persist(null)
@@ -50,7 +53,11 @@ export function AuthProvider({ children }) {
   }, [])
 
   return (
+<<<<<<< HEAD
     <AuthContext.Provider value={{ user, loading, login, loginWithGoogle, logout, refreshMe, setUser: persist }}>
+=======
+    <AuthContext.Provider value={{ user, loading, login, logout, refreshMe, setUser: persist }}>
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
       {children}
     </AuthContext.Provider>
   )

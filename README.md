@@ -67,7 +67,11 @@ EduNexus/
 │   └── .env.example
 │
 └── README.md
+<<<<<<< HEAD
 Getting Started
+=======
+Getting Started 
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 
 Follow the steps below to run EduNexus on your local machine.
 
@@ -369,7 +373,11 @@ Project Highlights
 Full-stack web application
 React + Vite frontend
 Express.js REST API
+<<<<<<< HEAD
 MySQL relational database
+=======
+MySQL relational database 
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 JWT authentication
 Role-Based Access Control
 Secure password hashing
@@ -408,4 +416,8 @@ https://github.com/shahidurshakib
 
 License
 
+<<<<<<< HEAD
 This project was developed by me for educational, academic, and research purposes.
+=======
+This project was developed by me for educational, academic, and research purposes.
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092

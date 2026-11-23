@@ -151,6 +151,7 @@ async function removeAdmin(req, res, next) {
   }
 }
 
+<<<<<<< HEAD
 // PATCH /api/users/:id/make-admin  (platform_founder only) — directly
 // promotes any existing user to admin, no self-request needed.
 async function makeAdmin(req, res, next) {
@@ -175,6 +176,8 @@ async function makeAdmin(req, res, next) {
   }
 }
 
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 // ============================================================================
 // ROLE APPROVAL WORKFLOW (admin / mentor / investor requests)
 // ============================================================================
@@ -427,6 +430,7 @@ async function getInvestorProfile(req, res, next) {
   }
 }
 
+<<<<<<< HEAD
 // GET /api/members  (public) — directory of registered members
 async function getPublicMembers(req, res, next) {
   try {
@@ -465,6 +469,8 @@ async function getMemberProfile(req, res, next) {
   }
 }
 
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 // PATCH /api/mentors/me  (mentor updates own public profile)
 async function updateMyMentorProfile(req, res, next) {
   try {
@@ -507,7 +513,10 @@ module.exports = {
   activateUser,
   deleteUser,
   removeAdmin,
+<<<<<<< HEAD
   makeAdmin,
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
   requestRole,
   getApprovals,
   approveRequest,
@@ -516,8 +525,11 @@ module.exports = {
   getMentorProfile,
   getPublicInvestors,
   getInvestorProfile,
+<<<<<<< HEAD
   getPublicMembers,
   getMemberProfile,
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
   updateMyMentorProfile,
   updateMyInvestorProfile,
 };

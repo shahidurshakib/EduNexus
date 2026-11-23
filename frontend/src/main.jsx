@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react'
+=======
+import React from 'react'
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
@@ -6,6 +10,7 @@ import { AuthProvider } from './context/AuthContext'
 import { ThemeProvider } from './context/ThemeContext'
 import './index.css'
 
+<<<<<<< HEAD
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID
 
 // @react-oauth/google is optional: if `npm install` hasn't been re-run since
@@ -34,14 +39,20 @@ function GoogleProviderGate({ children }) {
   return children
 }
 
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider>
         <AuthProvider>
+<<<<<<< HEAD
           <GoogleProviderGate>
             <App />
           </GoogleProviderGate>
+=======
+          <App />
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
         </AuthProvider>
       </ThemeProvider>
     </BrowserRouter>

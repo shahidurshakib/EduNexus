@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
+<<<<<<< HEAD
 import {
   getResearch, deleteResearch, addResearchMentor,
   uploadResearchDocument, downloadResearchDocument,
 } from '../../api/research'
 import { listMentors } from '../../api/users'
+=======
+import { getResearch, deleteResearch } from '../../api/research'
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 import Loader from '../../components/ui/Loader'
 import ErrorBanner from '../../components/ui/ErrorBanner'
 import Badge from '../../components/ui/Badge'
@@ -17,6 +21,7 @@ export default function ResearchDetail() {
   const [data, setData] = useState(null)
   const [error, setError] = useState('')
 
+<<<<<<< HEAD
   const [mentorPickerOpen, setMentorPickerOpen] = useState(false)
   const [mentorOptions, setMentorOptions] = useState([])
   const [selectedMentorId, setSelectedMentorId] = useState('')
@@ -30,6 +35,9 @@ export default function ResearchDetail() {
 
   const load = () => getResearch(id).then(setData).catch((e) => setError(e.message))
   useEffect(() => { load() }, [id])
+=======
+  useEffect(() => { getResearch(id).then(setData).catch((e) => setError(e.message)) }, [id])
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 
   if (error) return <div className="container-page py-16"><ErrorBanner message={error} /></div>
   if (!data) return <Loader />
@@ -37,11 +45,15 @@ export default function ResearchDetail() {
   const research = data.research || data
   const authors = data.authors || []
   const patents = data.patents || []
+<<<<<<< HEAD
   const mentors = data.mentors || []
   const documents = data.documents || []
   const canManage = user && (user.role === 'admin' || user.role === 'platform_founder' || research.created_by === user.id)
   const isCollaborator = user && (canManage || mentors.some((m) => m.user_id === user.id))
   const canUploadDoc = isCollaborator
+=======
+  const canManage = user && (user.role === 'admin' || user.role === 'platform_founder' || research.created_by === user.id)
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 
   const onDelete = async () => {
     if (!confirm('Delete this research record?')) return
@@ -49,6 +61,7 @@ export default function ResearchDetail() {
     navigate('/research')
   }
 
+<<<<<<< HEAD
   const openMentorPicker = async () => {
     setMentorPickerOpen(true)
     if (mentorOptions.length === 0) {
@@ -89,16 +102,21 @@ export default function ResearchDetail() {
     }
   }
 
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
   return (
     <div className="container-page py-12">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="eyebrow">{research.department} · Supervisor: {research.supervisor}</p>
           <h1 className="mt-1 max-w-3xl font-display text-3xl font-semibold leading-tight">{research.title}</h1>
+<<<<<<< HEAD
           <p className="mt-2 text-sm text-ink-500 dark:text-ink-400">
             Posted by <span className="font-medium">{research.created_by_name}</span>
             {research.created_by_organization && <> · {research.created_by_organization}</>}
           </p>
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
           <div className="mt-3 flex flex-wrap gap-2">
             <Badge status={research.publication_status || research.publicationStatus} />
             {(research.patent_status || research.patentStatus) && (research.patent_status || research.patentStatus) !== 'none' && <Badge status={research.patent_status || research.patentStatus} />}
@@ -121,6 +139,7 @@ export default function ResearchDetail() {
             <ul className="space-y-2 text-sm">{authors.map((a) => <li key={a.id}>{a.author_name || a.authorName}</li>)}</ul>
           ) : <p className="text-sm text-ink-400">No authors listed.</p>}
         </div>
+<<<<<<< HEAD
 
         <div className="card">
           <div className="flex items-center justify-between">
@@ -147,6 +166,8 @@ export default function ResearchDetail() {
           )}
         </div>
 
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
         <div className="card">
           <p className="eyebrow mb-3">Patents</p>
           {patents.length ? (
@@ -160,6 +181,7 @@ export default function ResearchDetail() {
             </ul>
           ) : <p className="text-sm text-ink-400">No patents filed yet.</p>}
         </div>
+<<<<<<< HEAD
 
         <div className="card">
           <p className="eyebrow mb-3">Full paper & draft proposals</p>
@@ -202,6 +224,8 @@ export default function ResearchDetail() {
             </form>
           )}
         </div>
+=======
+>>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
       </div>
     </div>
   )
