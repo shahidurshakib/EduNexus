@@ -1,64 +1,75 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { getStartup, deleteStartup, updateStartupStatus } from '../../api/startups'
-<<<<<<< HEAD
+import { getStartup, deleteStartup } from '../../api/startups'
 import { listIncomingApplications } from '../../api/applications'
-=======
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 import Loader from '../../components/ui/Loader'
 import ErrorBanner from '../../components/ui/ErrorBanner'
 import Badge from '../../components/ui/Badge'
 import DataTable from '../../components/ui/DataTable'
-<<<<<<< HEAD
 import ApplyModal from '../../components/applications/ApplyModal'
 import ApplicationReviewList from '../../components/applications/ApplicationReviewList'
-=======
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 import { useAuth } from '../../context/AuthContext'
 
 export default function StartupDetail() {
   const { id } = useParams()
   const { user } = useAuth()
   const navigate = useNavigate()
+
   const [data, setData] = useState(null)
   const [error, setError] = useState('')
-<<<<<<< HEAD
   const [applyOpen, setApplyOpen] = useState(false)
   const [apps, setApps] = useState([])
-=======
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 
   const load = () => getStartup(id).then(setData).catch((e) => setError(e.message))
-  useEffect(() => { load() }, [id])
 
-<<<<<<< HEAD
+  useEffect(() => {
+    load()
+  }, [id])
+
+  const founders = data?.founders || []
+
+  const canManageEarly = user && (
+    user.role === 'platform_founder' ||
+    user.role === 'admin' ||
+    founders.some((f) => f.id === user.id)
+  )
+
   const loadApps = () => {
-    listIncomingApplications().then((d) => {
-      setApps((d.applications || []).filter((a) => a.targetType === 'startup' && String(a.targetId) === String(id)))
-    }).catch(() => {})
+    listIncomingApplications()
+      .then((d) => {
+        setApps(
+          (d.applications || []).filter(
+            (a) => a.targetType === 'startup' && String(a.targetId) === String(id)
+          )
+        )
+      })
+      .catch(() => {})
   }
 
-  // canManage depends on `data`, which isn't loaded yet on first render — but
-  // hooks must run unconditionally, so this checks readiness inside the effect
-  // instead of skipping the useEffect call itself.
-  const founders = data?.founders || []
-  const canManageEarly = user && (user.role === 'platform_founder' || user.role === 'admin' || founders.some((f) => f.id === user.id))
-  useEffect(() => { if (data && canManageEarly) loadApps() }, [data, canManageEarly, id]) // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (data && canManageEarly) loadApps()
+  }, [data, canManageEarly, id])
 
-  if (error) return <div className="container-page py-16"><ErrorBanner message={error} /></div>
+  if (error) {
+    return (
+      <div className="container-page py-16">
+        <ErrorBanner message={error} />
+      </div>
+    )
+  }
+
   if (!data) return <Loader />
 
-  const { startup, mentors = [], investors = [], fundingHistory = [] } = data
+  const {
+    startup,
+    mentors = [],
+    investors = [],
+    fundingHistory = [],
+  } = data
+
   const canManage = canManageEarly
   const isFounder = user && founders.some((f) => f.id === user.id)
   const canApply = user && ['member', 'mentor'].includes(user.role) && !isFounder
-=======
-  if (error) return <div className="container-page py-16"><ErrorBanner message={error} /></div>
-  if (!data) return <Loader />
-
-  const { startup, founders = [], mentors = [], investors = [], fundingHistory = [] } = data
-  const canManage = user && (user.role === 'platform_founder' || user.role === 'admin' || founders.some((f) => f.id === user.id))
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 
   const onDelete = async () => {
     if (!confirm(`Delete ${startup.name}? This cannot be undone.`)) return
@@ -77,15 +88,18 @@ export default function StartupDetail() {
             <Badge status={startup.status} />
           </div>
         </div>
+
         {canManage && (
           <div className="flex gap-3">
             <Link to={`/dashboard/startups/${id}/edit`} className="btn-secondary">Edit</Link>
             <button onClick={onDelete} className="btn-danger">Delete</button>
           </div>
         )}
-<<<<<<< HEAD
+
         {canApply && (
-          <button onClick={() => setApplyOpen(true)} className="btn-primary">Apply to collaborate</button>
+          <button onClick={() => setApplyOpen(true)} className="btn-primary">
+            Apply to collaborate
+          </button>
         )}
       </div>
 
@@ -98,14 +112,14 @@ export default function StartupDetail() {
         allowLock
       />
 
-=======
-      </div>
-
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
-      <p className="mt-6 max-w-3xl text-ink-600 dark:text-ink-300">{startup.description}</p>
+      <p className="mt-6 max-w-3xl text-ink-600 dark:text-ink-300">
+        {startup.description}
+      </p>
 
       {startup.funding_needed != null && (
-        <p className="mt-4 font-mono text-sm text-gold-600">Seeking ${Number(startup.funding_needed).toLocaleString()}</p>
+        <p className="mt-4 font-mono text-sm text-gold-600">
+          Seeking ${Number(startup.funding_needed).toLocaleString()}
+        </p>
       )}
 
       <div className="mt-10 grid gap-8 lg:grid-cols-3">
@@ -113,20 +127,30 @@ export default function StartupDetail() {
           <p className="eyebrow mb-3">Founders</p>
           {founders.length ? (
             <ul className="space-y-2 text-sm">
-              {founders.map((f) => <li key={f.id}>{f.full_name} <span className="text-ink-400">— {f.role_title}</span></li>)}
+              {founders.map((f) => (
+                <li key={f.id}>
+                  {f.full_name} <span className="text-ink-400">— {f.role_title}</span>
+                </li>
+              ))}
             </ul>
           ) : <p className="text-sm text-ink-400">Not listed.</p>}
         </div>
+
         <div className="card">
           <p className="eyebrow mb-3">Mentors</p>
           {mentors.length ? (
-            <ul className="space-y-2 text-sm">{mentors.map((m) => <li key={m.id}>{m.full_name}</li>)}</ul>
+            <ul className="space-y-2 text-sm">
+              {mentors.map((m) => <li key={m.id}>{m.full_name}</li>)}
+            </ul>
           ) : <p className="text-sm text-ink-400">No mentors linked yet.</p>}
         </div>
+
         <div className="card">
           <p className="eyebrow mb-3">Investors</p>
           {investors.length ? (
-            <ul className="space-y-2 text-sm">{investors.map((iv) => <li key={iv.id}>{iv.full_name}</li>)}</ul>
+            <ul className="space-y-2 text-sm">
+              {investors.map((iv) => <li key={iv.id}>{iv.full_name}</li>)}
+            </ul>
           ) : <p className="text-sm text-ink-400">No investors linked yet.</p>}
         </div>
       </div>
@@ -144,16 +168,17 @@ export default function StartupDetail() {
           emptyLabel="No funding rounds recorded."
         />
       </div>
-<<<<<<< HEAD
 
       {canManage && (
         <div className="mt-8">
           <p className="eyebrow mb-3">Applications to collaborate</p>
-          <ApplicationReviewList applications={apps} onChanged={loadApps} mode="incoming" />
+          <ApplicationReviewList
+            applications={apps}
+            onChanged={loadApps}
+            mode="incoming"
+          />
         </div>
       )}
-=======
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
     </div>
   )
 }

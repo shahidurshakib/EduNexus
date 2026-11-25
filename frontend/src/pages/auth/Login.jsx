@@ -1,11 +1,9 @@
+
 import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import ErrorBanner from '../../components/ui/ErrorBanner'
-<<<<<<< HEAD
 import GoogleAuthButton from '../../components/auth/GoogleAuthButton'
-=======
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 
 export default function Login() {
   const { login } = useAuth()
@@ -19,9 +17,12 @@ export default function Login() {
     e.preventDefault()
     setError('')
     setLoading(true)
+
     try {
       await login(form.email, form.password)
-      navigate(location.state?.from?.pathname || '/dashboard', { replace: true })
+      navigate(location.state?.from?.pathname || '/dashboard', {
+        replace: true,
+      })
     } catch (err) {
       setError(err.message)
     } finally {
@@ -32,31 +33,63 @@ export default function Login() {
   return (
     <div>
       <h1 className="font-display text-2xl font-semibold">Log in</h1>
-      <p className="mt-1 text-sm text-ink-500 dark:text-ink-400">Welcome back to your EduNexus record.</p>
+      <p className="mt-1 text-sm text-ink-500 dark:text-ink-400">
+        Welcome back to your EduNexus record.
+      </p>
 
       <form onSubmit={submit} className="mt-8 space-y-4">
         <ErrorBanner message={error} />
+
         <div>
           <label className="field-label">Email</label>
-          <input required type="email" className="field-input" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+          <input
+            required
+            type="email"
+            className="field-input"
+            value={form.email}
+            onChange={(e) =>
+              setForm({ ...form, email: e.target.value })
+            }
+          />
         </div>
+
         <div>
           <div className="flex items-center justify-between">
             <label className="field-label">Password</label>
-            <Link to="/forgot-password" className="text-xs font-medium text-gold-600 hover:underline">Forgot password?</Link>
+            <Link
+              to="/forgot-password"
+              className="text-xs font-medium text-gold-600 hover:underline"
+            >
+              Forgot password?
+            </Link>
           </div>
-          <input required type="password" className="field-input" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
+
+          <input
+            required
+            type="password"
+            className="field-input"
+            value={form.password}
+            onChange={(e) =>
+              setForm({ ...form, password: e.target.value })
+            }
+          />
         </div>
-        <button disabled={loading} className="btn-primary w-full">{loading ? 'Logging in…' : 'Log in'}</button>
+
+        <button disabled={loading} className="btn-primary w-full">
+          {loading ? 'Logging in...' : 'Log in'}
+        </button>
       </form>
 
-<<<<<<< HEAD
       <GoogleAuthButton onError={setError} />
 
-=======
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
       <p className="mt-6 text-center text-sm text-ink-500 dark:text-ink-400">
-        New to EduNexus? <Link to="/register" className="font-medium text-gold-600 hover:underline">Create an account</Link>
+        New to EduNexus?{' '}
+        <Link
+          to="/register"
+          className="font-medium text-gold-600 hover:underline"
+        >
+          Create an account
+        </Link>
       </p>
     </div>
   )

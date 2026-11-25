@@ -1,3 +1,4 @@
+
 import client, { request } from './client'
 
 export const listResearch = (params) => request(client.get('/research', { params }))
@@ -5,6 +6,7 @@ export const getResearch = (id) => request(client.get(`/research/${id}`))
 export const createResearch = (payload) => request(client.post('/research', payload))
 export const updateResearch = (id, payload) => request(client.put(`/research/${id}`, payload))
 export const deleteResearch = (id) => request(client.delete(`/research/${id}`))
+
 export const uploadResearchPdf = (id, file) => {
   const fd = new FormData()
   fd.append('pdf', file)
@@ -15,7 +17,6 @@ export const createPatent = (payload) => request(client.post('/research/patents'
 export const listPatents = (params) => request(client.get('/research/patents', { params }))
 export const updatePatent = (id, payload) => request(client.put(`/research/patents/${id}`, payload))
 export const deletePatent = (id) => request(client.delete(`/research/patents/${id}`))
-<<<<<<< HEAD
 
 export const addResearchMentor = (id, mentorId) => request(client.post(`/research/${id}/mentors`, { mentorId }))
 
@@ -27,8 +28,6 @@ export const uploadResearchDocument = (id, { file, docType, isLocked }) => {
   return request(client.post(`/research/${id}/documents`, fd, { headers: { 'Content-Type': 'multipart/form-data' } }))
 }
 
-// Locked documents need the Authorization header, so fetch as a blob via the
-// authenticated client rather than linking straight to the URL.
 export const downloadResearchDocument = async (docId, filename = 'document.pdf') => {
   const res = await client.get(`/research/documents/${docId}/download`, { responseType: 'blob' })
   const url = window.URL.createObjectURL(new Blob([res.data]))
@@ -40,5 +39,3 @@ export const downloadResearchDocument = async (docId, filename = 'document.pdf')
   a.remove()
   window.URL.revokeObjectURL(url)
 }
-=======
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092

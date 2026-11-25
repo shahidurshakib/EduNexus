@@ -1,3 +1,4 @@
+
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: 'class',
@@ -52,7 +53,6 @@ export default {
       boxShadow: {
         card: '0 1px 2px rgba(13,18,36,0.06), 0 8px 24px -8px rgba(13,18,36,0.12)',
       },
-<<<<<<< HEAD
       keyframes: {
         fadeUp: {
           '0%': { opacity: '0', transform: 'translateY(16px)' },
@@ -77,8 +77,6 @@ export default {
         'float-slow': 'floatSlow 5s ease-in-out infinite',
         'grow-bar': 'growBar 1s ease-out both',
       },
-=======
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
     },
   },
   plugins: [],

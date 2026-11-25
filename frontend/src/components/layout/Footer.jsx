@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom'
 import Logo from './Logo'
 
@@ -11,6 +12,7 @@ export default function Footer() {
             The campus-to-market pipeline connecting student founders, faculty research, mentors and investors.
           </p>
         </div>
+
         <div>
           <p className="eyebrow mb-3">Platform</p>
           <ul className="space-y-2 text-sm text-ink-500 dark:text-ink-400">
@@ -20,19 +22,18 @@ export default function Footer() {
             <li><Link to="/research" className="hover:text-gold-600">Research archive</Link></li>
           </ul>
         </div>
+
         <div>
           <p className="eyebrow mb-3">Community</p>
           <ul className="space-y-2 text-sm text-ink-500 dark:text-ink-400">
             <li><Link to="/mentors" className="hover:text-gold-600">Mentors</Link></li>
             <li><Link to="/investors" className="hover:text-gold-600">Investors</Link></li>
-<<<<<<< HEAD
             <li><Link to="/members" className="hover:text-gold-600">Members</Link></li>
-=======
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
             <li><Link to="/about" className="hover:text-gold-600">About</Link></li>
             <li><Link to="/contact" className="hover:text-gold-600">Contact</Link></li>
           </ul>
         </div>
+
         <div>
           <p className="eyebrow mb-3">Account</p>
           <ul className="space-y-2 text-sm text-ink-500 dark:text-ink-400">
@@ -41,6 +42,7 @@ export default function Footer() {
           </ul>
         </div>
       </div>
+
       <div className="border-t border-ink-100 py-6 text-center font-mono text-xs text-ink-400 dark:border-ink-800">
         © {new Date().getFullYear()} EduNexus. Built on campus, backed by ventures.
       </div>

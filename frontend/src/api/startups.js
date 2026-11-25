@@ -1,10 +1,8 @@
+
 import client, { request } from './client'
 
 export const listStartups = (params) => request(client.get('/startups', { params }))
-<<<<<<< HEAD
 export const getStartupStats = () => request(client.get('/startups/stats/summary'))
-=======
->>>>>>> d1cca0860ac39149356ef502b0bd42f16f6d9092
 export const getStartup = (id) => request(client.get(`/startups/${id}`))
 export const createStartup = (payload) => request(client.post('/startups', payload))
 export const updateStartup = (id, payload) => request(client.put(`/startups/${id}`, payload))
