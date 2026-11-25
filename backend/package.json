@@ -26,6 +26,7 @@
     "mysql2": "^3.10.1",
     "nodemailer": "^10.6.1",
     "pdfkit": "^0.15.0",
+    "resend": "^6.39.0",
     "xss-clean": "^0.1.4"
   },
   "devDependencies": {
