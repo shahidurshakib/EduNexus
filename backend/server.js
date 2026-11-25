@@ -18,9 +18,10 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:5173',
   'https://edu-nexus-three-ashen.vercel.app',
+  'https://edunexusbd.vercel.app',
   ...(process.env.CLIENT_URL || '')
     .split(',')
-    .map((url) => url.trim())
+    .map((url) => url.trim().replace(/\/$/, ''))
     .filter(Boolean),
 ];
 
@@ -38,7 +39,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options(/.*/, cors(corsOptions));
 
 // ---------- Security & core middleware ----------
 app.use(helmet());
