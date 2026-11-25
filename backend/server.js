@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 
 const express = require('express');
@@ -13,14 +14,34 @@ const { notFound, errorHandler } = require('./src/middleware/errorHandler');
 
 const app = express();
 
+// ---------- CORS Configuration ----------
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://edu-nexus-three-ashen.vercel.app',
+  ...(process.env.CLIENT_URL || '')
+    .split(',')
+    .map((url) => url.trim())
+    .filter(Boolean),
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error(`CORS blocked for origin: ${origin}`));
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
+app.use(cors(corsOptions));
+app.options(/.*/, cors(corsOptions));
+
 // ---------- Security & core middleware ----------
 app.use(helmet());
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
-    credentials: true,
-  })
-);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -33,7 +54,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api', routes);
 
 app.get('/', (req, res) => {
-  res.send('EduNexus API is live 🚀');
+  res.send('EduNexus API is live');
 });
 
 app.use(notFound);
@@ -45,10 +66,10 @@ const PORT = process.env.PORT || 5000;
   try {
     await testConnection();
     app.listen(PORT, () => {
-      console.log(`🚀 EduNexus API listening on http://localhost:${PORT}`);
+      console.log(`EduNexus API listening on port ${PORT}`);
     });
   } catch (err) {
-    console.error('❌ Failed to start server:', err.message);
+    console.error('Failed to start server:', err.message);
     process.exit(1);
   }
 })();
